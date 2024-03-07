@@ -1,0 +1,42 @@
+Script run on machine "x86_64"
+rm -rf peak unit_test .objs  
+g++ -std=c++20 -g -O0 -pedantic -Wall -Wfatal-errors -Wextra -Wno-unused-parameter -Wno-unused-variable -MMD -MP -msse2 -c main.cpp -o .objs/main.o
+g++ -std=c++20 -g -O0 -pedantic -Wall -Wfatal-errors -Wextra -Wno-unused-parameter -Wno-unused-variable -MMD -MP -msse2 -c peak.cpp -o .objs/peak.o
+g++ .objs/main.o .objs/peak.o -std=c++20 -o peak
+g++ -std=c++20 -g -O0 -pedantic -Wall -Wfatal-errors -Wextra -Wno-unused-parameter -Wno-unused-variable -MMD -MP -msse2 -c tests/unit_test.cpp -o .objs/tests/unit_test.o
+g++ .objs/peak.o .objs/tests/unit_test.o -std=c++20 -o unit_test
+
+ Built the test program:  unit_test
+
+Start performing tests
+End test
+Execute 11 test cases, PASS 11
+===== PASS =====
+
+Unit test passed
+============= cat test.txt =============
+3
+17
+42
+1
+26
+8
+0
+63
+==================================
+Running peak test, "./peak 80 test.txt"
+17 42 1 26 
+26 8 0 63 
+duration: 5500 ns
+Test passed
+Running peak test, "./peak 40 test.txt"
+42 
+63 
+duration: 3500 ns
+Test passed
+Running peak test, "./peak 64 test.txt"
+42 1 26 
+8 0 63 
+duration: 3100 ns
+Test passed
+Test script exit successfully
